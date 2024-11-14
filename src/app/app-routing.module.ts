@@ -26,8 +26,9 @@ const routes: Routes = [
     component:EditPostComponent
   },
   {
-    path:'post/details/:id',
-    component:SinglePostComponent
+    path:'posts/details/:id',
+    component:SinglePostComponent,
+    resolve: { posts: PostsResolver }
   }
 ];
 
