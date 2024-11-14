@@ -5,6 +5,7 @@ import { PostListComponent } from './post/post-list/post-list.component';
 import { AddPostComponent } from './post/add-post/add-post.component';
 import { EditPostComponent } from './post/edit-post/edit-post.component';
 import { SinglePostComponent } from './post/single-post/single-post.component';
+import { PostsResolver } from './post/posts.resolver';
 
 const routes: Routes = [
   {
@@ -13,7 +14,8 @@ const routes: Routes = [
   },
   {
     path: 'posts',
-    component:PostListComponent
+    component:PostListComponent,
+    resolve: { posts: PostsResolver },
   },
   {
     path:'posts/add',
