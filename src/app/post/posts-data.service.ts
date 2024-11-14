@@ -4,9 +4,11 @@ import { Post } from './../models/post.model';
 import { Injectable } from '@angular/core';
 import { DefaultDataService, HttpUrlGenerator } from '@ngrx/data';
 import { HttpClient } from '@angular/common/http';
+import { Update } from '@ngrx/entity';
 
 @Injectable()
 export class PostsDataService extends DefaultDataService<Post> {
+  [x: string]: any;
   constructor(http: HttpClient, httpUrlGenerator: HttpUrlGenerator) {
     super('Post', http, httpUrlGenerator);
   }
@@ -36,5 +38,11 @@ export class PostsDataService extends DefaultDataService<Post> {
           return { ...post, id: data.name };
         })
       );
+  }
+  override update(post: Update<Post>): Observable<Post> {
+    return this.http.put<Post>(
+      `https://vue-completecourse.firebaseio.com/posts/${post.id}.json`,
+      { ...post.changes }
+    );
   }
 }
